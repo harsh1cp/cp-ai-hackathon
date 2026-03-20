@@ -1,0 +1,16 @@
+# Local Postgres for Sales Call Analyzer — set SCA_DATABASE_URL to postgresql://analyzer:analyzer@127.0.0.1:5432/analyzer + use schema.postgres.prisma
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: analyzer
+      POSTGRES_PASSWORD: analyzer
+      POSTGRES_DB: analyzer
+    ports:
+      - "5432:5432"
+    volumes:
+      - cp_analyzer_pg:/var/lib/postgresql/data
+
+volumes:
+  cp_analyzer_pg:

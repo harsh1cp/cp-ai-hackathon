@@ -1,0 +1,43 @@
+// Default: PostgreSQL. Use SCA_DATABASE_URL (not DATABASE_URL) so a global shell DATABASE_URL
+// does not override this app. For SQLite, swap in prisma/schema.sqlite.prisma.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("SCA_DATABASE_URL")
+}
+
+enum Role {
+  MASTER
+  USER
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(USER)
+  parentId     String?
+  parent       User?    @relation("OrgUsers", fields: [parentId], references: [id])
+  children     User[]   @relation("OrgUsers")
+  calls        Call[]
+  createdAt    DateTime @default(now())
+}
+
+model Call {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  transcript      String   @db.Text
+  durationSeconds Float
+  segments        Json
+  analysis        Json
+  audioUrl        String?  @db.Text
+  fileName        String?
+  mimeType        String?
+}

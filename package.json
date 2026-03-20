@@ -1,0 +1,63 @@
+{
+  "name": "cp-ai-hackathon",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "verify:sales-q": "node scripts/verify-sales-q.cjs",
+    "postinstall": "prisma generate",
+    "db:push": "prisma db push",
+    "db:seed": "npx tsx prisma/seed.ts",
+    "db:migrate": "prisma migrate dev",
+    "playwright:install": "playwright install chromium",
+    "demo:video": "playwright test e2e/app-demo-video.spec.ts",
+    "demo:video:serve": "PLAYWRIGHT_START_SERVER=1 playwright test e2e/app-demo-video.spec.ts"
+  },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^3.0.41",
+    "@prisma/client": "5.22.0",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-scroll-area": "^1.2.10",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@vercel/blob": "^2.3.1",
+    "ai": "^6.0.116",
+    "bcryptjs": "^3.0.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "jose": "^6.2.2",
+    "lucide-react": "^0.577.0",
+    "next": "^16.2.0",
+    "openai": "^6.32.0",
+    "pptxgenjs": "^4.0.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "recharts": "^3.8.0",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^4.3.6",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "dotenv": "^17.3.1",
+    "eslint": "^10.0.3",
+    "eslint-config-next": "^16.2.0",
+    "postcss": "^8",
+    "prisma": "5.22.0",
+    "tailwindcss": "^3.4.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}

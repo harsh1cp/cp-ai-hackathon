@@ -1,0 +1,38 @@
+// Optional local SQLite: rename/copy this file to schema.prisma and set
+// SCA_DATABASE_URL=file:./prisma/dev.db — SQLite has no Json/enum; JSON stored as String.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("SCA_DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("USER") // "MASTER" | "USER"
+  parentId     String?
+  parent       User?    @relation("OrgUsers", fields: [parentId], references: [id])
+  children     User[]   @relation("OrgUsers")
+  calls        Call[]
+  createdAt    DateTime @default(now())
+}
+
+model Call {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  transcript      String
+  durationSeconds Float
+  segments        String
+  analysis        String
+  audioUrl        String?
+  fileName        String?
+  mimeType        String?
+}

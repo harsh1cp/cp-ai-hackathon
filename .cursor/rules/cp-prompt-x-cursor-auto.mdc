@@ -1,0 +1,17 @@
+---
+description: CP Prompt-X hackathon — use Cursor Auto for AI-assisted development
+alwaysApply: true
+---
+
+# CP Prompt-X · Cursor Auto
+
+This repo is built for **CP Prompt-X The AI Vibe Coding Hackathon**. Use **Cursor Auto** (Cursor’s autonomous agent mode) for feature work, refactors, and debugging when it fits your workflow.
+
+## Submission
+
+- Mention in README and slides that development was assisted with **Cursor Auto**.
+- Do not commit API keys; use `.env.local` only (gitignored).
+
+## Stack
+
+Next.js (App Router), Tailwind, shadcn/ui, Zustand. Keep changes focused and match existing patterns in `src/`.
